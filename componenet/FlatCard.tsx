@@ -1,25 +1,23 @@
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-import { StyleSheet, View } from 'react-native';
-import FlatCard from './componenet/FlatCard';
-
-function App() {
+export default function FlatCard() {
   return (
-    // <ScrollView>
     <View style={styles.container}>
-      <FlatCard />
+      <Text style={styles.headingText}>FlatCard</Text>
     </View>
-    // </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
+  headingText: {
     fontSize: 24,
+    fontWeight: 'bold',
+    backgroundColor: 'blue',
   },
 });
-export default App;
