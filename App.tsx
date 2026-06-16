@@ -1,22 +1,24 @@
 import React from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import FlatCard from './componenet/FlatCard';
+import FancyCard from './componenet/FancyCard';
+import ScollCard from './componenet/ScollCard';
 
 function App() {
   return (
-    // <ScrollView>
-    <View style={styles.container}>
-      <FlatCard />
-    </View>
-    // </ScrollView>
+    <ScrollView>
+      <View style={styles.container}>
+        <FlatCard />
+        <ScollCard />
+        <FancyCard />
+      </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 50,
   },
   text: {
     fontSize: 24,
