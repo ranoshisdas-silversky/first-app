@@ -24,6 +24,8 @@ export default function FlatCard() {
   );
 }
 
+// use rowgap, columngap, flexwrap, aligncontent, justifycontent, alignitems to create a grid of cards with space between them and centered in the container.
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -31,15 +33,16 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignContent: 'center',
     padding: 8,
-    // justifyContent: 'space-evenly',
+    justifyContent: 'space-evenly',
+    rowGap: 10,
+    columnGap: 10,
   },
   card: {
     // flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
     height: 100,
     width: 100,
-    margin: 10,
     borderRadius: 10,
     elevation: 5,
   },

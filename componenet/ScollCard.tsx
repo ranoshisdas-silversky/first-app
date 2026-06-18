@@ -7,17 +7,22 @@ export default function ScollCard() {
       <Text style={styles.headingText}>ScollCard</Text>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={[styles.card, styles.cardOne]}>
-          <Text style={styles.whiteText}>Red</Text>
-        </View>
-        <View style={[styles.card, styles.cardTwo]}>
-          <Text style={styles.whiteText}>Green</Text>
-        </View>
-        <View style={[styles.card, styles.cardThree]}>
-          <Text style={styles.whiteText}>Blue</Text>
-        </View>
-        <View style={[styles.card, styles.cardOne]}>
-          <Text style={styles.whiteText}>Red 2</Text>
+        <View style={styles.container}>
+          <View style={[styles.card, styles.cardOne]}>
+            <Text style={styles.whiteText}>Red</Text>
+          </View>
+          <View style={[styles.card, styles.cardTwo]}>
+            <Text style={styles.whiteText}>Green</Text>
+          </View>
+          <View style={[styles.card, styles.cardThree]}>
+            <Text style={styles.whiteText}>Blue</Text>
+          </View>
+          <View style={[styles.card, styles.cardOne]}>
+            <Text style={styles.whiteText}>Red 2</Text>
+          </View>
+          <View style={[styles.card, styles.cardThree]}>
+            <Text style={styles.whiteText}>Blue 2</Text>
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -27,8 +32,8 @@ export default function ScollCard() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    flex: 1,
     padding: 8,
+    gap: 10,
     // justifyContent: 'space-evenly',
   },
   card: {
@@ -37,7 +42,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 100,
     width: 100,
-    margin: 10,
     borderRadius: 10,
     elevation: 5,
   },
