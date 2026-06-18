@@ -12,27 +12,30 @@ import FlatCard from './componenet/FlatCard';
 import FancyCard from './componenet/FancyCard';
 import ScollCard from './componenet/ScollCard';
 import PropCard from './componenet/PropCard';
+import ListCard from './componenet/ListCard';
 
 function App() {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <PropCard
-          name="Ranoshis Das"
-          age={22}
-          imgLink="https://avatars.githubusercontent.com/u/127428253?v=4"
-        />
-        <FlatCard />
-
-        <ImageBackground
-          source={require('./img/atal-bridge.png')}
-          style={{ width: '100%' }}
-        >
+    <View style={styles.container}>
+      <ListCard />
+      <ScrollView>
+        <View>
+          <PropCard
+            name="Ranoshis Das"
+            age={22}
+            imgLink="https://avatars.githubusercontent.com/u/127428253?v=4"
+          />
           <FlatCard />
-        </ImageBackground>
 
-        <ScollCard />
-        {/* <Image
+          <ImageBackground
+            source={require('./img/atal-bridge.png')}
+            style={{ width: '100%' }}
+          >
+            <FlatCard />
+          </ImageBackground>
+
+          <ScollCard />
+          {/* <Image
           source={{ uri: 'ic_launcher' }}
           style={{
             width: 40,
@@ -41,26 +44,26 @@ function App() {
             alignSelf: 'center',
           }}
         /> */}
-        <FancyCard />
+          <FancyCard />
 
-        <Image
-          source={{ uri: 'https://reactjs.org/logo-og.png' }}
-          style={{
-            width: '90%',
-            height: 450,
-            marginHorizontal: '5%',
-            borderRadius: 10,
-            marginVertical: 12,
-          }}
-        />
-      </View>
-    </ScrollView>
+          <Image
+            source={{ uri: 'https://reactjs.org/logo-og.png' }}
+            style={{
+              width: '90%',
+              height: 450,
+              marginHorizontal: '5%',
+              borderRadius: 10,
+              marginVertical: 12,
+            }}
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 50,
-  },
+  container: {},
+
   text: {
     fontSize: 24,
   },
