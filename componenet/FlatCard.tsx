@@ -1,7 +1,16 @@
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert,
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import React, { useState } from 'react';
 
 export default function FlatCard() {
+  const [curentInput, newInput] = useState('');
   const [isModelVisible, setModelVisible] = useState(false);
   return (
     <View>
@@ -36,18 +45,44 @@ export default function FlatCard() {
         visible={isModelVisible}
         animationType="slide"
         style={styles.modal}
+        onRequestClose={() => {
+          setModelVisible(false);
+          newInput('');
+          Alert.alert(
+            curentInput
+              ? 'Modal colsed with text!'
+              : 'Modal colsed without any text!',
+            curentInput,
+          );
+        }}
       >
-        <Pressable
-          onPress={() => setModelVisible(false)}
-          style={({ pressed }) => [
-            { backgroundColor: pressed ? 'green' : '#00ff00' },
-            styles.card,
-          ]}
-        >
-          <View>
-            <Text style={styles.modalText}>Press to Close</Text>
-          </View>
-        </Pressable>
+        <View style={styles.modalContainter}>
+          <Pressable
+            onPress={() => {
+              setModelVisible(false);
+              newInput('');
+              Alert.alert(
+                curentInput
+                  ? 'Modal colsed with text!'
+                  : 'Modal colsed without any text!',
+                curentInput,
+              );
+            }}
+            style={({ pressed }) => [
+              { backgroundColor: pressed ? 'green' : '#00ff00' },
+              styles.card,
+            ]}
+          >
+            <View>
+              <Text style={styles.modalText}>Press to Close</Text>
+            </View>
+          </Pressable>
+          <TextInput
+            style={styles.input}
+            value={curentInput}
+            onChangeText={newInput}
+          />
+        </View>
       </Modal>
     </View>
   );
@@ -71,7 +106,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange',
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -81,6 +115,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  modalContainter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   card: {
     // flex: 1,
     justifyContent: 'center',
@@ -89,6 +127,11 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 10,
     elevation: 5,
+  },
+  input: {
+    width: 300,
+    height: 50,
+    backgroundColor: 'lightblue',
   },
   headingText: {
     fontSize: 24,
