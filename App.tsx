@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import {
   Image,
@@ -7,6 +7,8 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  RefreshControl,
+  StatusBar,
 } from 'react-native';
 import FlatCard from './componenet/FlatCard';
 import FancyCard from './componenet/FancyCard';
@@ -15,9 +17,39 @@ import PropCard from './componenet/PropCard';
 import ListCard from './componenet/ListCard';
 
 function App() {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 10000);
+  }, []);
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <StatusBar
+        hidden={false}
+        barStyle={'dark-content'}
+        backgroundColor={'#64ff35'}
+      />
+      <ScrollView
+        style={{
+          // backgroundColor: '#000',
+          paddingTop: 40,
+        }}
+        contentContainerStyle={{ backgroundColor: '#fff', paddingBottom: 40 }}
+        // bounces={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={['red', 'blue', 'yellow', 'green']}
+            title="Loading..."
+            titleColor={'#ffffff'}
+            tintColor={'#fff'}
+          />
+        }
+      >
         <ListCard />
         <View>
           <PropCard

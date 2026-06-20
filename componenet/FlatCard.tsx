@@ -1,15 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 
 export default function FlatCard() {
+  const [isModelVisible, setModelVisible] = useState(false);
   return (
     <View>
       <Text style={styles.headingText}>FlatCard</Text>
-
       <View style={styles.container}>
-        <View style={[styles.card, styles.cardOne]}>
-          <Text style={styles.whiteText}>Red</Text>
-        </View>
+        <Pressable
+          onPress={() => setModelVisible(true)}
+          style={({ pressed }) => [
+            { backgroundColor: pressed ? '#af0000' : '#ff0000' },
+            styles.card,
+          ]}
+        >
+          <View>
+            <Text style={styles.whiteText}>Red</Text>
+          </View>
+        </Pressable>
+
         <View style={[styles.card, styles.cardTwo]}>
           <Text style={styles.whiteText}>Green</Text>
         </View>
@@ -20,9 +29,26 @@ export default function FlatCard() {
           <Text style={styles.whiteText}>Red 2</Text>
         </View>
         <View style={[styles.card, styles.cardTwo]}>
-          <Text style={styles.whiteText}>Green2</Text>
+          <Text style={styles.whiteText}>Green 2</Text>
         </View>
       </View>
+      <Modal
+        visible={isModelVisible}
+        animationType="slide"
+        style={styles.modal}
+      >
+        <Pressable
+          onPress={() => setModelVisible(false)}
+          style={({ pressed }) => [
+            { backgroundColor: pressed ? 'green' : '#00ff00' },
+            styles.card,
+          ]}
+        >
+          <View>
+            <Text style={styles.modalText}>Press to Close</Text>
+          </View>
+        </Pressable>
+      </Modal>
     </View>
   );
 }
@@ -39,6 +65,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     rowGap: 10,
     columnGap: 10,
+  },
+  modal: {
+    margin: 20,
+    backgroundColor: 'orange',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 5,
   },
   card: {
     // flex: 1,
@@ -68,5 +109,8 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontWeight: 'bold',
     fontSize: 18,
+  },
+  modalText: {
+    fontWeight: 600,
   },
 });
