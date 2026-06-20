@@ -19,6 +19,9 @@ export default function FlatCard() {
         <View style={[styles.card, styles.cardOne]}>
           <Text style={styles.whiteText}>Red 2</Text>
         </View>
+        <View style={[styles.card, styles.cardTwo]}>
+          <Text style={styles.whiteText}>Green2</Text>
+        </View>
       </View>
     </View>
   );

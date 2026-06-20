@@ -22,6 +22,10 @@ export default function ListCard() {
       name: 'Bob',
       age: 30,
     },
+    {
+      name: 'Bobi',
+      age: 30,
+    },
   ];
   return (
     <View style={styles.container}>
@@ -29,7 +33,14 @@ export default function ListCard() {
 
       <View style={styles.flatList}>
         <FlatList
+          // horizontal
+          scrollEnabled={false}
           data={data}
+          // initialNumToRender={2}
+          inverted
+          refreshing={false}
+          onRefresh={() => console.log('refreshed')}
+          numColumns={1}
           keyExtractor={item => item.name}
           renderItem={({ item }) => (
             <PropCard name={item.name} age={item.age} />
@@ -38,6 +49,8 @@ export default function ListCard() {
       </View>
       <View style={styles.sectionList}>
         <SectionList
+          // horizontal
+          scrollEnabled={false}
           sections={[
             {
               title: 'name',
@@ -69,10 +82,8 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     width: '100%',
-    height: 300,
   },
   headingText: {
-    flex: 0,
     fontSize: 24,
     fontWeight: 'bold',
     paddingHorizontal: 10,
@@ -80,11 +91,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#b9b9b9a5',
   },
   flatList: {
-    flex: 1,
-    // height: 50,
+    // width: '120%',
+    // height: 200,
+    backgroundColor: 'skyblue',
   },
   sectionList: {
-    flex: 1,
+    backgroundColor: 'skyblue',
+    // height: 200,
   },
   sectionHeader: {
     fontSize: 18,

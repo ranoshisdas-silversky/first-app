@@ -1,4 +1,12 @@
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, { useState } from 'react';
 
 type cardProps = {
@@ -10,6 +18,24 @@ type cardProps = {
 export default function PropCard(props: cardProps) {
   const imageSource = props.imgLink ? { uri: props.imgLink } : undefined;
   const [isSub, setSub] = useState(false);
+  const [isAni, setAni] = useState(false);
+  function showAnimation() {
+    setAni(true);
+    setTimeout(() => {
+      setAni(false);
+      Alert.alert(
+        `Want to ${isSub ? 'Unsubcribed' : 'Subcribed'}?`,
+        'Press ok to accept, and cancel to undo the action...!!!',
+        [
+          { text: 'Cancel' },
+          {
+            text: 'Ok',
+            onPress: () => setSub(isSub ? false : true),
+          },
+        ],
+      );
+    }, 3000);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.nameCard}>
@@ -17,18 +43,30 @@ export default function PropCard(props: cardProps) {
           Name:
           <Text style={styles.name}> {props.name}</Text>
         </Text>
-        <Text style={styles.text}>
-          Age:
-          <Text style={styles.age}> {props.age}</Text>
-        </Text>
+        {isSub ? (
+          <Text style={styles.text}>
+            Age:
+            <Text style={styles.age}> {props.age}</Text>
+          </Text>
+        ) : null}
         <View style={styles.button}>
           <Button
             title={isSub ? 'unsubcribe' : 'subcribe'}
-            onPress={() => setSub(isSub ? false : true)}
+            disabled={isAni}
+            onPress={() => {
+              showAnimation();
+            }}
             color={isSub ? 'red' : 'green'}
           />
         </View>
       </View>
+      <ActivityIndicator
+        animating={isAni}
+        // hidesWhenStopped={false}
+        color={'#00ff00'}
+        size={'large'}
+        /// <reference path="" />
+      />
       <View>
         {imageSource ? (
           <Image source={imageSource} style={styles.image} />
@@ -44,6 +82,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'skyblue',
     padding: 10,
+    borderWidth: 0.5,
+    borderColor: '#000000',
   },
   nameCard: {
     justifyContent: 'space-between',

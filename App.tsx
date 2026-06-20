@@ -17,8 +17,8 @@ import ListCard from './componenet/ListCard';
 function App() {
   return (
     <View style={styles.container}>
-      <ListCard />
       <ScrollView>
+        <ListCard />
         <View>
           <PropCard
             name="Ranoshis Das"
