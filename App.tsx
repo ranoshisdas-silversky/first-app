@@ -45,8 +45,8 @@ function App() {
             onRefresh={onRefresh}
             colors={['red', 'blue', 'yellow', 'green']}
             title="Loading..."
-            titleColor={'#ffffff'}
-            tintColor={'#fff'}
+            titleColor={'#1008ff'}
+            tintColor={'#001aff'}
           />
         }
       >

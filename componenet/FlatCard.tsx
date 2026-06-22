@@ -5,13 +5,22 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableHighlight,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, { useState } from 'react';
+import VList from './VList';
 
 export default function FlatCard() {
   const [curentInput, newInput] = useState('');
   const [isModelVisible, setModelVisible] = useState(false);
+  const [isVisible, setVisible] = useState(false);
+  const [tap, setTap] = useState(0);
+  function handleTap() {
+    setTap(tap + 1);
+  }
   return (
     <View>
       <Text style={styles.headingText}>FlatCard</Text>
@@ -31,9 +40,13 @@ export default function FlatCard() {
         <View style={[styles.card, styles.cardTwo]}>
           <Text style={styles.whiteText}>Green</Text>
         </View>
-        <View style={[styles.card, styles.cardThree]}>
-          <Text style={styles.whiteText}>Blue</Text>
-        </View>
+
+        <TouchableOpacity activeOpacity={0.4} onPress={() => setVisible(true)}>
+          <View style={[styles.card, styles.cardThree]}>
+            <Text style={styles.whiteText}>Blue</Text>
+          </View>
+        </TouchableOpacity>
+
         <View style={[styles.card, styles.cardOne]}>
           <Text style={styles.whiteText}>Red 2</Text>
         </View>
@@ -41,6 +54,7 @@ export default function FlatCard() {
           <Text style={styles.whiteText}>Green 2</Text>
         </View>
       </View>
+      {/* Model implementations */}
       <Modal
         visible={isModelVisible}
         animationType="slide"
@@ -81,8 +95,48 @@ export default function FlatCard() {
             style={styles.input}
             value={curentInput}
             onChangeText={newInput}
+            placeholder="Enter your message here"
+            placeholderTextColor={'white'}
+            // caretHidden
+            contextMenuHidden
+            selectionColor={'red'}
+            inputMode="text"
+            autoCorrect={false}
+            // returnKeyLabel="Done"
+            enterKeyHint="done"
+            // keyboardType="decimal-pad"
           />
+          <VList />
         </View>
+      </Modal>
+      <Modal
+        // transparent
+        visible={isVisible}
+        backdropColor={'#ffae00'}
+        onRequestClose={() => {
+          setVisible(false);
+          setTap(0);
+        }}
+        style={[styles.modal]}
+      >
+        {/* Touchable without feedback  */}
+        <TouchableWithoutFeedback onPress={handleTap}>
+          <View style={styles.tapView}>
+            <Text style={styles.textNomal}>Tap here</Text>
+            <Text style={styles.textNomal}>Total tap: {tap}</Text>
+          </View>
+        </TouchableWithoutFeedback>
+
+        {/* Touchable with highlight */}
+        <TouchableHighlight
+          underlayColor={'#ff0000'}
+          onPress={() => {
+            setVisible(false);
+            setTap(0);
+          }}
+        >
+          <Text style={styles.exitText}>Exit the Modal</Text>
+        </TouchableHighlight>
       </Modal>
     </View>
   );
@@ -102,20 +156,14 @@ const styles = StyleSheet.create({
     columnGap: 10,
   },
   modal: {
+    flex: 1,
     margin: 20,
-    backgroundColor: 'orange',
     borderRadius: 20,
     padding: 35,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
     elevation: 5,
   },
   modalContainter: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -132,6 +180,8 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     backgroundColor: 'lightblue',
+    fontSize: 20,
+    borderWidth: 1,
   },
   headingText: {
     fontSize: 24,
@@ -155,5 +205,27 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontWeight: 600,
+  },
+  tapView: {
+    flex: 1,
+    marginTop: 50,
+    marginBottom: 30,
+    backgroundColor: '#ffffff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  exitText: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    backgroundColor: 'grey',
+    height: 50,
+    fontSize: 24,
+    color: '#ffffff',
+    fontWeight: 700,
+  },
+  textNomal: {
+    fontSize: 24,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
   },
 });
